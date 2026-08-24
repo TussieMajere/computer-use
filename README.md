@@ -11,6 +11,10 @@ Gjøre **Computer Use** (cua-driver) synlig, lærbart og samarbeidsvennlig:
 - ✅ **Samarbeid** — Tussie hjelper med BankID, innlogginger, 2FA — agenten gjør resten
 - ✅ **Dokumentasjon** — hver økt logges og forklares
 
+## 🔗 Relatert
+
+- [🐉 MajereAi](https://ai-uncensored.store/) — Uncensored AI. SOUL.md jailbreak. Norsk.
+
 ## 🏗️ Prosjektstruktur
 
 ```
