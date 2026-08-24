@@ -1,0 +1,35 @@
+name: Auto Research — Computer Use Synlighet
+
+on:
+  schedule:
+    - cron: '0 6,18 * * *'   # Hver 6. time (06:00 og 18:00 UTC)
+  workflow_dispatch:          # Manuell kjøring
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut repo
+        uses: actions/checkout@v4
+
+      - name: Kjør forskning
+        run: |
+          echo "🔬 Kjører automatisert forskning på Computer Use..."
+          
+          # Nyeste forskning innen cua-driver, VNC, streaming
+          echo "## 🤖 Automatisk forskning $(date -u)" >> RESEARCH.md
+          echo "" >> RESEARCH.md
+          
+          # Sjekk om det finnes nye artikler
+          curl -s "https://api.github.com/search/repositories?q=cua-driver+computer-use+agent&sort=updated" | jq -r '.items[:5] | .[] | "- [\(.full_name)](\(.html_url)) — \(.description // "Ingen beskrivelse")' 2>/dev/null >> RESEARCH.md || true
+          
+          echo "" >> RESEARCH.md
+          echo "_Generert av GitHub Actions_" >> RESEARCH.md
+
+      - name: Commit og push
+        run: |
+          git config user.name "TussieMajere-bot"
+          git config user.email "tussie@hookofdragons.com"
+          git add RESEARCH.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-forskning $(date -u +%Y-%m-%d)"
+          git push
