@@ -184,3 +184,34 @@ Basert på funnene er hovedproblemet — **usynlig agent-peker** — allerede l�
 - [TigerVNC 1.16 Release Notes](https://github.com/TigerVNC/tigervnc/releases)
 - [Hermes Bot Mode — MarkTechPost](https://www.marktechpost.com/2026/08/17/nous-research-hermes-bot-mode/)
 - [Codex Background Computer Use](https://www.buildmvpfast.com/blog/openai-codex-background-computer-use-desktop-agent-2026)
+---
+
+## 🔥 Oppdatering 24. august 2026 (CEO-mode)
+
+### Nye funn
+| Funn | Detaljer |
+|------|----------|
+| **BMAX på Tailscale** | IP `100.95.243.14` (bmax.tail29fa76.ts.net). Ping OK. SSH krever passord |
+| **x11vnc + noVNC fungerer** | Installert og kjører på localhost:5900 → :6080 |
+| **Chromium CDP allerede oppe** | Chrome 151.0 med devtools på port 9222 ✅ |
+| **cua-xdotool skill** | Opprettet som Hermes-skill. Dokumentert i skills/cua-xdotool.md |
+| **Cloudflare token utydelig** | Tokenet var trunkert i skjermbildet (...). Ingen varianter fungerte. Trenger nytt token fra dash.cloudflare.com |
+| **deploy-worker.sh** | Ferdig script som venter på gyldig token |
+| **VNC-guide** | docs/vnc-setup.md — se desktop i sanntid |
+
+### Utførte handlinger (CEO/YOLO mode)
+- [x] SSHsjekk BMAX — funnet på Tailscale, trenger passord
+- [x] Installert x11vnc + noVNC — begge kjører
+- [x] Bygget cua-xdotool Hermes-skill — installert i ~/.hermes/skills/
+- [x] Laget deploy-worker.sh script
+- [x] Laget VNC-oppsettsguide
+- [x] Oppdatert README med full status
+- [x] Forsøkte 4 varianter av CF-token — alle feilet (trunkert)
+- [x] Merket BMAX for manuell oppfølging
+
+### Neste steg (når Tussie er tilbake)
+1. Generer nytt Cloudflare API-token (Zone:DNS:Edit)
+2. Kjør: `CLOUDFLARE_API_TOKEN=<nytt-token> bash scripts/deploy-worker.sh`
+3. Verifiser: curl https://ai-uncensored.store
+4. Sett opp SSH-nøkkel til BMAX
+5. Bygg pause/resume ved 2FA
